@@ -16,6 +16,8 @@ PATH=${QTHOME}/bin:${QTINST}/bin:${PATH}
 
 rm -rf repository/*
 rm -rf deploy/packages/com.trumpton.base/data/bin/*
+rm -rf deploy/packages/com.trumpton.base/data/doc/*
+
 rm -f deploy/packages/com.trumpton.base.contactmanager/data/bin/*
 rm -f deploy/packages/com.trumpton.base.easynotepad/data/bin/*
 rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/*
@@ -25,6 +27,7 @@ rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/*
 #
 
 mkdir -p deploy/packages/com.trumpton.base/data/bin
+mkdir -p deploy/packages/com.trumpton.base/data/doc
 
 mkdir -p deploy/packages/com.trumpton.base.contactmanager/data/bin
 cp -f ${CONTACTMANAGER}/ContactManager.exe/ deploy/packages/com.trumpton.base/data/bin
@@ -45,15 +48,15 @@ mv deploy/packages/com.trumpton.base/data/bin/ParseWeb.exe deploy/packages/com.t
 # Transfer additional DLLs and EXEs
 #
 
-cp src/contactmanager.bin/* deploy/packages/com.trumpton.base.contactmanager/data/bin
-cp src/easynotepad.bin/* deploy/packages/com.trumpton.base.easynotepad/data/bin
+cp -R src/contactmanager/* deploy/packages/com.trumpton.base.contactmanager/data
+cp -R src/easynotepad/* deploy/packages/com.trumpton.base.easynotepad/data
 
 #
 # Transfer SSL files, not detected by the windeployqt.exe program
 #
 
-cp ${QTHOME}/bin/ssleay32.dll deploy/packages/com.trumpton.base/data/bin
-cp ${QTHOME}/bin/libeay32.dll deploy/packages/com.trumpton.base/data/bin
+cp src/openssl64.bin/*.dll deploy/packages/com.trumpton.base/data/bin
+cp src/openssl64.bin/OpenSSL_License.txt deploy/packages/com.trumpton.base/data/doc
 
 #
 # Generate offline installer
