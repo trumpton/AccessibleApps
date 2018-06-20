@@ -2,7 +2,7 @@
 
 if [ ! -f buildvars.inc ]; then
 	echo "Creating a default buildvars.inc.  Please edit / check this file and re-run"
-	cp src/buildvars.example.inc buildvars.inc
+	cp deploy/src/buildvars.example.inc buildvars.inc
 	exit
 fi
 
@@ -30,7 +30,7 @@ mkdir -p deploy/packages/com.trumpton.base/data/bin
 mkdir -p deploy/packages/com.trumpton.base/data/doc
 
 mkdir -p deploy/packages/com.trumpton.base.contactmanager/data/bin
-cp -f ${CONTACTMANAGER}/ContactManager.exe/ deploy/packages/com.trumpton.base/data/bin
+cp -f ${CONTACTMANAGER}/ContactManager.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ContactManager.exe)
 mv deploy/packages/com.trumpton.base/data/bin/ContactManager.exe deploy/packages/com.trumpton.base.contactmanager/data/bin
 
@@ -48,14 +48,14 @@ mv deploy/packages/com.trumpton.base/data/bin/ParseWeb.exe deploy/packages/com.t
 # Transfer additional DLLs and EXEs
 #
 
-cp -R src/contactmanager/* deploy/packages/com.trumpton.base.contactmanager/data
-cp -R src/easynotepad/* deploy/packages/com.trumpton.base.easynotepad/data
+cp -R deploy/src/contactmanager/* deploy/packages/com.trumpton.base.contactmanager/data
+cp -R deploy/src/easynotepad/* deploy/packages/com.trumpton.base.easynotepad/data
 
 #
 # Transfer SSL files, not detected by the windeployqt.exe program
 #
 
-cp -R src/openssl64/* deploy/packages/com.trumpton.base/data
+cp -R deploy/src/openssl64/* deploy/packages/com.trumpton.base/data
 
 #
 # Generate offline installer
