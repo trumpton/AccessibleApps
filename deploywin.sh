@@ -55,8 +55,7 @@ cp -R src/easynotepad/* deploy/packages/com.trumpton.base.easynotepad/data
 # Transfer SSL files, not detected by the windeployqt.exe program
 #
 
-cp src/openssl64.bin/*.dll deploy/packages/com.trumpton.base/data/bin
-cp src/openssl64.bin/OpenSSL_License.txt deploy/packages/com.trumpton.base/data/doc
+cp -R src/openssl64/* deploy/packages/com.trumpton.base/data
 
 #
 # Generate offline installer
