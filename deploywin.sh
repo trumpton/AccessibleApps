@@ -10,15 +10,19 @@ source ./buildvars.inc
 
 PATH=${QTHOME}/bin:${QTINST}/bin:${PATH}
 
+#
 # Clear Old Files
+#
 
 rm -rf repository/*
 rm -rf deploy/packages/com.trumpton.base/data/bin/*
-rm -f deploy/packages/com.trumpton.base.contactmanager/data/bin/ContactManager.exe
-rm -f deploy/packages/com.trumpton.base.easynotepad/data/bin/EasyNotepad.exe
-rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/ParseWeb.exe
+rm -f deploy/packages/com.trumpton.base.contactmanager/data/bin/*
+rm -f deploy/packages/com.trumpton.base.easynotepad/data/bin/*
+rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/*
 
+#
 # Transfer Executable
+#
 
 mkdir -p deploy/packages/com.trumpton.base/data/bin
 
@@ -37,16 +41,29 @@ cp -f ${PARSEWEB}/ParseWeb.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ParseWeb.exe)
 mv deploy/packages/com.trumpton.base/data/bin/ParseWeb.exe deploy/packages/com.trumpton.base.parseweb/data/bin
 
+#
 # Transfer additional DLLs and EXEs
-cp src/bin/* deploy/packages/com.trumpton.base/data/bin
+#
+
+cp src/contactmanager.bin/* deploy/packages/com.trumpton.base.contactmanager/data/bin
+cp src/easynotepad.bin/* deploy/packages/com.trumpton.base.easynotepad/data/bin
+
+#
+# Transfer SSL files, not detected by the windeployqt.exe program
+#
+
 cp ${QTHOME}/bin/ssleay32.dll deploy/packages/com.trumpton.base/data/bin
 cp ${QTHOME}/bin/libeay32.dll deploy/packages/com.trumpton.base/data/bin
 
+#
 # Generate offline installer
+#
 
 binarycreator.exe --offline-only -p deploy/packages -c deploy/config/config-win64-${QTVERSION}.xml repository/${APPNAME}OfflineInstaller.exe
 
+#
 # Generate online installer
+#
 
 binarycreator.exe --online-only -p deploy/packages -c deploy/config/config-win64-${QTVERSION}.xml repository/${APPNAME}Installer.exe
 
