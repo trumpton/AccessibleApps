@@ -14,29 +14,32 @@ PATH=${QTHOME}/bin:${QTINST}/bin:${PATH}
 
 rm -rf repository/*
 rm -rf deploy/packages/com.trumpton.base/data/bin/*
-rm -f deploy/packages/com.trumpton.base.contactmanager/data/bin/${CONTACTMANAGER}
-rm -f deploy/packages/com.trumpton.base.easynotepad/data/bin/${EASYNOTEPAD}
-rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/${PARSEWEB}
+rm -f deploy/packages/com.trumpton.base.contactmanager/data/bin/ContactManager.exe
+rm -f deploy/packages/com.trumpton.base.easynotepad/data/bin/EasyNotepad.exe
+rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/ParseWeb.exe
 
 # Transfer Executable
 
 mkdir -p deploy/packages/com.trumpton.base/data/bin
 
 mkdir -p deploy/packages/com.trumpton.base.contactmanager/data/bin
-cp -f ${CONTACTMANAGER} deploy/packages/com.trumpton.base/data/bin
-(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ${CONTACTMANAGER}.exe)
-mv deploy/packages/com.trumpton.base/data/bin/${CONTACTMANAGER}.exe deploy/packages/com.trumpton.base.contactmanager/data/bin
+cp -f ${CONTACTMANAGER}/ContactManager.exe/ deploy/packages/com.trumpton.base/data/bin
+(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ContactManager.exe)
+mv deploy/packages/com.trumpton.base/data/bin/ContactManager.exe deploy/packages/com.trumpton.base.contactmanager/data/bin
 
 mkdir -p deploy/packages/com.trumpton.base.easynotepad/data/bin
-cp -f ${EASYNOTEPAD} deploy/packages/com.trumpton.base/data/bin
-(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ${EASYNOTEPAD}.exe)
-mv deploy/packages/com.trumpton.base/data/bin/${EASYNOTEPAD}.exe deploy/packages/com.trumpton.base.easynotepad/data/bin
+cp -f ${EASYNOTEPAD}/EasyNotepad.exe deploy/packages/com.trumpton.base/data/bin
+(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe EasyNotepad.exe)
+mv deploy/packages/com.trumpton.base/data/bin/EasyNotepad.exe deploy/packages/com.trumpton.base.easynotepad/data/bin
 
 mkdir -p deploy/packages/com.trumpton.base.parseweb/data/bin
-cp -f ${PARSEWEB} deploy/packages/com.trumpton.base/data/bin
-(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ${PARSEWEB}.exe)
-mv deploy/packages/com.trumpton.base/data/bin/${PARSEWEB}.exe deploy/packages/com.trumpton.base.parseweb/data/bin
+cp -f ${PARSEWEB}/ParseWeb.exe deploy/packages/com.trumpton.base/data/bin
+(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ParseWeb.exe)
+mv deploy/packages/com.trumpton.base/data/bin/ParseWeb.exe deploy/packages/com.trumpton.base.parseweb/data/bin
 
+# Transfer additional DLLs and EXEs
+cp src/bin/* deploy/packages/com.trumpton.base/data/bin
+cp ${QTHOME}/bin/SSL.dll deploy/packages/com.trumpton.base/data/bin
 
 # Generate offline installer
 
