@@ -39,7 +39,8 @@ mv deploy/packages/com.trumpton.base/data/bin/ParseWeb.exe deploy/packages/com.t
 
 # Transfer additional DLLs and EXEs
 cp src/bin/* deploy/packages/com.trumpton.base/data/bin
-cp ${QTHOME}/bin/SSL.dll deploy/packages/com.trumpton.base/data/bin
+cp ${QTHOME}/bin/ssleay32.dll deploy/packages/com.trumpton.base/data/bin
+cp ${QTHOME}/bin/libeay32.dll deploy/packages/com.trumpton.base/data/bin
 
 # Generate offline installer
 
