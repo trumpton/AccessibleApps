@@ -1,4 +1,3 @@
-
 #
 # Application Name
 #
@@ -23,12 +22,14 @@ QTIFWVER=QtIFW-3.0.4
 # Paths to EXE File
 #
 
-SOURCEEXE=../buildDesktop_Qt_${QTUVERSION}_MSVC2015_64bit2-Release/build/release/${APPNAME}.exe
+CONTACTMANAGER=build-ContactManager-Desktop_Qt_5_10_1_MSVC2015_64bit2-Release/release
+EASYNOTEPAD=build-EasyNotepad-Desktop_Qt_5_10_1_MSVC2015_64bit2-Release/release
+PARSEWEB=build-ParseWeb-Desktop_Qt_5_10_1_MSVC2015_64bit2-Release/release
 
 #
 # Path to QT Files
 #
 
-QTHOME=/c/Qt/${QTVERSION}/${BUILDENV}
-QTINST=/c/Qt/${QTIFWVER}
+QTHOME=/d/Qt/${QTVERSION}/${BUILDENV}
+QTINST=/d/Qt/${QTIFWVER}
 
