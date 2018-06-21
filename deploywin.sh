@@ -29,6 +29,9 @@ rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/*
 mkdir -p deploy/packages/com.trumpton.base/data/bin
 mkdir -p deploy/packages/com.trumpton.base/data/doc
 
+cp -f ${COPYFILES}/CopyFiles.exe deploy/packages/com.trumpton.base/data/bin
+(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe CopyFiles.exe)
+
 mkdir -p deploy/packages/com.trumpton.base.contactmanager/data/bin
 cp -f ${CONTACTMANAGER}/ContactManager.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ContactManager.exe)
