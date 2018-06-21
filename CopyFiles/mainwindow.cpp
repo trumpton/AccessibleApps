@@ -21,10 +21,14 @@ MainWindow::MainWindow(QWidget *parent) :
     } else {
         // Run
         show() ;
-        if (!doCopy(QCoreApplication::arguments().at(1), QCoreApplication::arguments().at(2), true)) {
+        QDir src(QCoreApplication::arguments().at(1)) ;
+        QDir dst(QCoreApplication::arguments().at(2)) ;
+        if (!doCopy(src.absolutePath(), dst.absolutePath(), true)) {
             QMessageBox::critical(NULL, "Copy Files", "Error Copying Files") ;
         }
     }
+
+    qApp->quit() ;
 }
 
 MainWindow::~MainWindow()
@@ -39,6 +43,7 @@ bool MainWindow::doCopy(QString src, QString dst, bool root)
         return false;
 
     if (root) {
+        dir.mkpath(dst) ;
         ui->progressBar->setMaximum(dir.entryList(QDir::Files).size() +
                               dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot).size() );
         ui->progressBar->setValue(0) ;
@@ -63,9 +68,9 @@ bool MainWindow::doCopy(QString src, QString dst, bool root)
         QString dst_path = dst + QDir::separator() + f ;
         QString src_path = src + QDir::separator() + f ;
         qInfo() << "Copying File" << src_path << " to " << dst_path << "\n" ;
-        ui->label->setText(src_path + QString(" - ") + dst_path) ;
+        ui->label->setText(src_path) ;
         qApp->processEvents() ;
-        QFile::remove(src_path) ;
+        QFile::remove(dst_path) ;
         if (!QFile::copy(src_path, dst_path)) return false ;
         if (root) ui->progressBar->setValue(++index) ;
         qApp->processEvents() ;
