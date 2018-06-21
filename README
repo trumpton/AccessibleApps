@@ -1,9 +1,11 @@
 
 INTRODUCTION
+============
 
 This bundle is the Trumpton Apps Accessible tools.
 
 downloadapps.sh
+---------------
 
 This script downloads the applications from the 
 git repository.
@@ -11,7 +13,18 @@ git repository.
 The tools should then be built as MSVC2015_64
 applications.
 
+
+
+pullupdates.sh
+--------------
+
+This script downloads any updates that have been
+made to each application from the git repository.
+
+
+
 deploywin.sh
+------------
 
 This script builds the distribution repository using
 information from the deploy folder.
