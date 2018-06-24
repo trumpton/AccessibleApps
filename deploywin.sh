@@ -52,7 +52,7 @@ mv deploy/packages/com.trumpton.base/data/bin/ContactManager.exe deploy/packages
 #
 ENVER=$(cat EasyNotepad/version.h | grep BUILDVERSION | cut -d\" -f2)
 ENDAT=$(cat EasyNotepad/version.h | grep BUILDDATE | cut -d\" -f2)
-ENDIR=deploy/package/com.trumpton.base.easynotepad
+ENDIR=deploy/packages/com.trumpton.base.easynotepad
 rm -f $ENDIR/meta/package.xml
 cat $ENDIR/meta/package.src | sed -e s/RELEASEVERSION/$ENVER/ | sed -e s/RELEASEDATE/$ENDAT/g > $ENDIR/meta/package.xml
 
@@ -66,13 +66,13 @@ mv deploy/packages/com.trumpton.base/data/bin/EasyNotepad.exe deploy/packages/co
 #
 PWVER=$(cat ParseWeb/version.h | grep BUILDVERSION | cut -d\" -f2)
 PWDAT=$(cat ParseWeb/version.h | grep BUILDDATE | cut -d\" -f2)
-PWDIR=deploy/package/com.trumpton.base.parseweb
+PWDIR=deploy/packages/com.trumpton.base.parseweb
 rm -r $PWDIR/meta/package.xml
 cat $PWDIR/meta/package.src | sed -e s/RELEASEVERSION/$PWVER/ | sed -e s/RELEASEDATE/$PWDAT/g > $PWDIR/meta/package.xml
 
 
 mkdir -p $PWDIR/data/bin
-cp -f ${PARSEWEB}/ParseWeb.exe com.deploy/packages/com.trumpton.base/data/bin
+cp -f ${PARSEWEB}/ParseWeb.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ParseWeb.exe)
 mv deploy/packages/com.trumpton.base/data/bin/ParseWeb.exe deploy/packages/com.trumpton.base.parseweb/data/bin
 
