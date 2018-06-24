@@ -32,18 +32,47 @@ mkdir -p deploy/packages/com.trumpton.base/data/doc
 cp -f ${COPYFILES}/CopyFiles.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe CopyFiles.exe)
 
-mkdir -p deploy/packages/com.trumpton.base.contactmanager/data/bin
+#
+# ContactManager
+#
+
+CMVER=$(cat ContactManager/version.h | grep BUILDVERSION | cut -d\" -f2)
+CMDAT=$(cat ContactManager/version.h | grep BUILDDATE | cut -d\" -f2)
+CMDIR=deploy/packages/com.trumpton.base.contactmanager
+rm -f $CMDIR/meta/package.xml
+cat $CMDIR/meta/package.src | sed -e s/RELEASEVERSION/$CMVER/ | sed -e s/RELEASEDATE/$CMDAT/g > $CMDIR/meta/package.xml
+
+mkdir -p $CMDIR/data/bin
 cp -f ${CONTACTMANAGER}/ContactManager.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ContactManager.exe)
 mv deploy/packages/com.trumpton.base/data/bin/ContactManager.exe deploy/packages/com.trumpton.base.contactmanager/data/bin
 
-mkdir -p deploy/packages/com.trumpton.base.easynotepad/data/bin
+#
+# EasyNotepad
+#
+ENVER=$(cat EasyNotepad/version.h | grep BUILDVERSION | cut -d\" -f2)
+ENDAT=$(cat EasyNotepad/version.h | grep BUILDDATE | cut -d\" -f2)
+ENDIR=deploy/package/com.trumpton.base.easynotepad
+rm -f $ENDIR/meta/package.xml
+cat $ENDIR/meta/package.src | sed -e s/RELEASEVERSION/$ENVER/ | sed -e s/RELEASEDATE/$ENDAT/g > $ENDIR/meta/package.xml
+
+mkdir -p $ENDIR/data/bin
 cp -f ${EASYNOTEPAD}/EasyNotepad.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe EasyNotepad.exe)
 mv deploy/packages/com.trumpton.base/data/bin/EasyNotepad.exe deploy/packages/com.trumpton.base.easynotepad/data/bin
 
-mkdir -p deploy/packages/com.trumpton.base.parseweb/data/bin
-cp -f ${PARSEWEB}/ParseWeb.exe deploy/packages/com.trumpton.base/data/bin
+#
+# ParseWeb
+#
+PWVER=$(cat ParseWeb/version.h | grep BUILDVERSION | cut -d\" -f2)
+PWDAT=$(cat ParseWeb/version.h | grep BUILDDATE | cut -d\" -f2)
+PWDIR=deploy/package/com.trumpton.base.parseweb
+rm -r $PWDIR/meta/package.xml
+cat $PWDIR/meta/package.src | sed -e s/RELEASEVERSION/$PWVER/ | sed -e s/RELEASEDATE/$PWDAT/g > $PWDIR/meta/package.xml
+
+
+mkdir -p $PWDIR/data/bin
+cp -f ${PARSEWEB}/ParseWeb.exe com.deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ParseWeb.exe)
 mv deploy/packages/com.trumpton.base/data/bin/ParseWeb.exe deploy/packages/com.trumpton.base.parseweb/data/bin
 
