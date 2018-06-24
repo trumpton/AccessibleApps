@@ -29,3 +29,16 @@ deploywin.sh
 This script builds the distribution repository using
 information from the deploy folder.
 
+The Package xml files for ContactManager, EasyNotepad 
+and ParseWeb are automatically created to include the 
+version number from the appropriate version.h file.
+
+If the dlls are updated (say through a change in the
+compiler libraries), the core package version must
+be manually modified.
+
+If the example files change, or the copyfiles app
+is modified, the examplefiles package version must
+be manually changed.
+
+
