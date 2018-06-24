@@ -3,7 +3,7 @@
     <DisplayName>Easy Notepad</DisplayName>
     <Description>Accessible Text Editor</Description>
     <Version>RELEASEVERSION</Version>
-    <ReleaseDate>RELEASEDATR</ReleaseDate>
+    <ReleaseDate>RELEASEDATE</ReleaseDate>
     <Default>true</Default>
     <Script>installscript.js</Script>
 </Package>
