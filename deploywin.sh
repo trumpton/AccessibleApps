@@ -21,6 +21,8 @@ rm -rf deploy/packages/com.trumpton.base/data/doc/*
 rm -f deploy/packages/com.trumpton.base.contactmanager/data/bin/*
 rm -f deploy/packages/com.trumpton.base.easynotepad/data/bin/*
 rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/*
+rm -f deploy/packages/com.trumpton.base.encryptfolder/data/bin/*
+
 
 #
 # Transfer Executable
@@ -31,6 +33,7 @@ mkdir -p deploy/packages/com.trumpton.base/data/doc
 
 cp -f ${COPYFILES}/CopyFiles.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe CopyFiles.exe)
+
 
 #
 # ContactManager
@@ -47,6 +50,7 @@ cp -f ${CONTACTMANAGER}/ContactManager.exe deploy/packages/com.trumpton.base/dat
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ContactManager.exe)
 mv deploy/packages/com.trumpton.base/data/bin/ContactManager.exe deploy/packages/com.trumpton.base.contactmanager/data/bin
 
+
 #
 # EasyNotepad
 #
@@ -61,6 +65,7 @@ cp -f ${EASYNOTEPAD}/EasyNotepad.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe EasyNotepad.exe)
 mv deploy/packages/com.trumpton.base/data/bin/EasyNotepad.exe deploy/packages/com.trumpton.base.easynotepad/data/bin
 
+
 #
 # ParseWeb
 #
@@ -70,11 +75,26 @@ PWDIR=deploy/packages/com.trumpton.base.parseweb
 rm -r $PWDIR/meta/package.xml
 cat $PWDIR/meta/package.src | sed -e s/RELEASEVERSION/$PWVER/ | sed -e s/RELEASEDATE/$PWDAT/g > $PWDIR/meta/package.xml
 
-
 mkdir -p $PWDIR/data/bin
 cp -f ${PARSEWEB}/ParseWeb.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe ParseWeb.exe)
 mv deploy/packages/com.trumpton.base/data/bin/ParseWeb.exe deploy/packages/com.trumpton.base.parseweb/data/bin
+
+
+#
+# EncryptFolder
+#
+EFVER=$(cat EncryptFolder/version.h | grep BUILDVERSION | cut -d\" -f2)
+EFDAT=$(cat EncryptFolder/version.h | grep BUILDDATE | cut -d\" -f2)
+EFDIR=deploy/packages/com.trumpton.base.encryptfolder
+rm -r $EFDIR/meta/package.xml
+cat $EFDIR/meta/package.src | sed -e s/RELEASEVERSION/$EFVER/ | sed -e s/RELEASEDATE/$EFDAT/g > $EFDIR/meta/package.xml
+
+mkdir -p $EFDIR/data/bin
+cp -f ${ENCRYPTFOLDER}/EncryptFolder.exe deploy/packages/com.trumpton.base/data/bin
+(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe EncryptFolder.exe)
+mv deploy/packages/com.trumpton.base/data/bin/EncryptFolder.exe ${EFDIR}/data/bin
+
 
 #
 # Transfer additional DLLs and EXEs

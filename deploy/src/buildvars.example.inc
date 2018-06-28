@@ -26,6 +26,7 @@ COPYFILES=build-CopyFiles-Desktop_Qt_5_10_1_MSVC2015_64bit2-Release/release
 CONTACTMANAGER=build-ContactManager-Desktop_Qt_5_10_1_MSVC2015_64bit2-Release/release
 EASYNOTEPAD=build-EasyNotepad-Desktop_Qt_5_10_1_MSVC2015_64bit2-Release/release
 PARSEWEB=build-ParseWeb-Desktop_Qt_5_10_1_MSVC2015_64bit2-Release/release
+ENCRYPTFOLDER=build-EncryptFolder-Desktop_Qt_5_10_1_MSVC2015_64bit2-Release/release
 
 #
 # Path to QT Files

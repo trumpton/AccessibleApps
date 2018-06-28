@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Encrypt Folder</DisplayName>
+    <Description>Folder Encryption / Decryption</Description>
+    <Version>RELEASEVERSION</Version>
+    <ReleaseDate>RELEASEDATE</ReleaseDate>
+    <Default>true</Default>
+    <Script>installscript.js</Script>
+</Package>
+
