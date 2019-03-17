@@ -4,7 +4,7 @@ git status
 echo ""
 echo "ContactManager"
 echo "--------------"
-(cd C0ntactManager ; git status)
+(cd ContactManager ; git status)
 echo ""
 echo "EasyNotepad"
 echo "-----------"
@@ -22,3 +22,8 @@ echo "ParseWeb"
 echo "--------"
 (cd ParseWeb ; git status)
 echo ""
+echo "KeyBackup"
+echo "--------"
+(cd KeyBackup ; git status)
+echo ""
+
