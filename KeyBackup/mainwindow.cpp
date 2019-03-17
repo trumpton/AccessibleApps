@@ -37,6 +37,7 @@ void MainWindow::readIni()
 
 void MainWindow::writeIni()
 {
+    return ;
     QSettings ini(sDomain, sApplication) ;
     ini.setValue("A", encryptedKey) ;
     ini.setValue("B", encryptedHash) ;

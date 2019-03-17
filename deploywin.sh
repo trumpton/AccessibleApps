@@ -22,6 +22,7 @@ rm -f deploy/packages/com.trumpton.base.contactmanager/data/bin/*
 rm -f deploy/packages/com.trumpton.base.easynotepad/data/bin/*
 rm -f deploy/packages/com.trumpton.base.parseweb/data/bin/*
 rm -f deploy/packages/com.trumpton.base.encryptfolder/data/bin/*
+rm -f deploy/packages/com.trumpton.base.keybackup/data/bin/*
 
 
 #
@@ -94,6 +95,21 @@ mkdir -p $EFDIR/data/bin
 cp -f ${ENCRYPTFOLDER}/EncryptFolder.exe deploy/packages/com.trumpton.base/data/bin
 (cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe EncryptFolder.exe)
 mv deploy/packages/com.trumpton.base/data/bin/EncryptFolder.exe ${EFDIR}/data/bin
+
+#
+# KeyBackup
+#
+KBVER=$(cat KeyBackup/version.h | grep BUILDVERSION | cut -d\" -f2)
+KBDAT=$(cat KeyBackup/version.h | grep BUILDDATE | cut -d\" -f2)
+KBDIR=deploy/packages/com.trumpton.base.keybackup
+rm -r $KBDIR/meta/package.xml
+cat $KBDIR/meta/package.src | sed -e s/RELEASEVERSION/$KBVER/ | sed -e s/RELEASEDATE/$KBDAT/g > $KBDIR/meta/package.xml
+
+mkdir -p $KBDIR/data/bin
+cp -f ${KEYBACKUP}/KeyBackup.exe deploy/packages/com.trumpton.base/data/bin
+(cd deploy/packages/com.trumpton.base/data/bin; windeployqt.exe KeyBackup.exe)
+mv deploy/packages/com.trumpton.base/data/bin/KeyBackup.exe ${KBDIR}/data/bin
+
 
 
 #
