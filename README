@@ -11,8 +11,7 @@ This script downloads the applications from the
 git repository.
 
 The tools should then be built as MSVC2015_64
-applications.
-
+applications using QT 5.10.1.
 
 
 pullupdates.sh
@@ -22,6 +21,14 @@ This script downloads any updates that have been
 made to each application from the git repository.
 
 
+Building
+--------
+
+To build, compile the applications in Release mode
+and set the outputs to be in D:\Projects\AccessibleApps\build-blah
+If you get an errors stating that the output must be at the top
+level, replace the D:\Projects\AccessibleApps with ..\ in the
+project configuration.
 
 deploywin.sh
 ------------
@@ -40,5 +47,9 @@ be manually modified.
 If the example files change, or the copyfiles app
 is modified, the examplefiles package version must
 be manually changed.
+
+Output Files will end up in 'repository'.
+The online files must be uploaded to vizier.
+
 
 

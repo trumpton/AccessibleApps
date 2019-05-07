@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>Google Fetch</DisplayName>
+    <Description>Debug Google Fetch Program</Description>
+    <Version>RELEASEVERSION</Version>
+    <ReleaseDate>RELEASEDATE</ReleaseDate>
+    <Default>false</Default>
+    <Script>installscript.js</Script>
+</Package>
+
