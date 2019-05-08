@@ -3,6 +3,11 @@ rem
 rem Microsoft Visual C++ / QT Build Script for Accessible Apps
 rem
 
+rem
+rem Builds into build folder
+rem Copies files to bin
+rem does not include SSL dlls (yet)
+rem does not clear out bin (yet)
 
 set AA=d:\Projects\AccessibleApps
 set QMAKE=E:\Qt5.10.1\5.10.1\msvc2015_64\bin\qmake.exe
