@@ -1,4 +1,4 @@
-mkdir -f EasyNotepad ContactManager ParseWeb EncryptFolder KeyBackup CopyFiles GoogleFetch EncPad
+mkdir -p EasyNotepad ContactManager ParseWeb EncryptFolder KeyBackup CopyFiles GoogleFetch EncPad
 (cd EasyNotepad ; git pull)
 (cd ContactManager ; git pull)
 (cd ParseWeb ; git pull)
