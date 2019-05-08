@@ -1,4 +1,7 @@
 #
+# Build script for Linux
+#
+#
 
 export QT_SELECT=qt5
 
