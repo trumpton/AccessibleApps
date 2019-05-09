@@ -20,36 +20,44 @@ pullupdates.sh
 This script downloads any updates that have been
 made to each application from the git repository.
 
+Building Linux
+--------------
 
-Building
---------
+To build, from a command line prompt, run dobuildlin.sh.  This will build
+the files into the build folder, then copy the executables into the bin
+folder.  Libraries are not copied, and are expected to be available in the
+standard lib folders.
 
-To build, compile the applications in Release mode
-and set the outputs to be in D:\Projects\AccessibleApps\build-blah
-If you get an errors stating that the output must be at the top
-level, replace the D:\Projects\AccessibleApps with ..\ in the
-project configuration.
+Building Windows
+----------------
 
-deploywin.sh
-------------
+To build, open a Visual C command line prompt, and run dobuildwin.bat
+This will build the files into the build folder, then copy the executables
+into the bin folder, and copy across all of the relevant DLLs.
 
-This script builds the distribution repository using
-information from the deploy folder.
+Deploying Windows
+-----------------
 
-The Package xml files for ContactManager, EasyNotepad 
-and ParseWeb are automatically created to include the 
-version number from the appropriate version.h file.
+Edit the deploy/config/config-win64-5.10.1.xml, and ensure that the
+version number, and web repository location are correct.
 
-If the dlls are updated (say through a change in the
-compiler libraries), the core package version must
-be manually modified.
+The deployment assumes that Git has been installed.
 
-If the example files change, or the copyfiles app
-is modified, the examplefiles package version must
-be manually changed.
+Run deploywin.sh from a bash prompt - this will create the repository
+installation files in the repository folder, using information from the
+deploy folder.
 
-Output Files will end up in 'repository'.
+Individual Package xml files for apps such as ContactManager are 
+automatically created to include the version number from the appropriate 
+version.h file.
+
+If the dlls are updated (say through a change in the compiler libraries), 
+the core package version in com.trumpton.base must be manually modified.
+
+If the example files change, or the copyfiles app is modified, the 
+examplefiles package (com.trumpton.base.exampleconfiguration) version 
+must be manually changed.
+
+Output Files will end up in 'repository'.  
 The online files must be uploaded to vizier.
-
-
 
