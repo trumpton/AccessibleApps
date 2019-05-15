@@ -11,7 +11,7 @@ set AA=d:\Projects\AccessibleApps
 set QMAKE=E:\Qt5.10.1\5.10.1\msvc2015_64\bin\qmake.exe
 set WINDEPLOYQT=E:\Qt5.10.1\5.10.1\msvc2015_64\bin\windeployqt.exe
 set WINSPEC=win32-msvc
-set OPENSSL=%AA%\deploy\src\openssl64\*.dll
+set OPENSSL=%AA%\deploy\src\openssl64\bin\*.dll
 
 cd %AA%
 deltree %AA%\bin
@@ -121,7 +121,7 @@ nmake clean
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
-%WINDEPLOYQT% ParseWebs.exe
+%WINDEPLOYQT% ParseWeb.exe
 
 rem
 rem Other Files
