@@ -31,6 +31,10 @@ standard lib folders.
 Building Windows
 ----------------
 
+If a new pull has been done, ensure that you remove the subdirectories 
+under 'build' - this is because the version acquisition lines in the pro
+files affect compiler switches, but do not 'dirty' the resulting makefiles.
+
 To build, open a Visual C command line prompt, and run dobuildwin.bat
 This will build the files into the build folder, then copy the executables
 into the bin folder, and copy across all of the relevant DLLs.
