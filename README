@@ -65,3 +65,11 @@ must be manually changed.
 Output Files will end up in 'repository'.  
 The online files must be uploaded to vizier.
 
+QT6.2
+=====
+
+Under Linux, if QT has been installed from the QT repository, several 
+dependencies may also need to be installed:
+
+sudo apt-get install gstreamer1.0 libspa-lib-0.1 clang libspa-bluetooth
+
