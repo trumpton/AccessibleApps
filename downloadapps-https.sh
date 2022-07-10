@@ -6,3 +6,4 @@ git clone https://github.com/trumpton/Lib.git
 git clone https://github.com/trumpton/EncPad.git
 git clone https://github.com/trumpton/GoogleFetch.git
 git clone https://github.com/trumpton/KeyBackup.git
+git clone https://github.com/trumpton/EasyList.git

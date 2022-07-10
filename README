@@ -4,8 +4,8 @@ INTRODUCTION
 
 This bundle is the Trumpton Apps Accessible tools.
 
-downloadapps.sh
----------------
+downloadapps-https.sh / downloadapps-ssh.sh
+-------------------------------------------
 
 This script downloads the applications from the 
 git repository.

@@ -1,4 +1,4 @@
-mkdir -p EasyNotepad ContactManager ParseWeb EncryptFolder KeyBackup CopyFiles GoogleFetch EncPad
+mkdir -p EasyNotepad ContactManager ParseWeb EncryptFolder KeyBackup CopyFiles GoogleFetch EncPad EasyList Lib
 (cd EasyNotepad ; echo EasyNotepad ; git pull ; git fetch --tags )
 (cd ContactManager ; echo ContactManager ; git pull ; git fetch --tags )
 (cd ParseWeb ; echo ParseWeb ; git pull ; git fetch --tags )
@@ -8,4 +8,5 @@ mkdir -p EasyNotepad ContactManager ParseWeb EncryptFolder KeyBackup CopyFiles G
 (cd GoogleFetch ; echo GoogleFetch ; git pull ; git fetch --tags )
 (cd EncPad ; echo EncPad ; git pull ; git fetch --tags )
 (cd Lib ; echo Lib ; git pull ; git fetch --tags )
+(cd EasyList ; echo EasyList ; git pull ; git fetch --tags )
 echo pull ; git pull ; git fetch --tags
