@@ -7,9 +7,9 @@ rem
 rem Builds into build folder, then Copies files to bin
 rem
 
-set AA=d:\Projects\AccessibleApps
-set QMAKE=E:\Qt5.10.1\5.10.1\msvc2015_64\bin\qmake.exe
-set WINDEPLOYQT=E:\Qt5.10.1\5.10.1\msvc2015_64\bin\windeployqt.exe
+set QTBIN=%QTHOME%\%QTVER%\msvc%MSVCVER%_64\bin
+set QMAKE=%QTBIN%\qmake.exe
+set WINDEPLOYQT=%QTBIN%\windeployqt.exe
 set WINSPEC=win32-msvc
 set OPENSSL=%AA%\deploy\src\openssl64\bin\*.dll
 
@@ -31,7 +31,7 @@ rem Contact Manager
 rem
 
 cd %AA%\build\ContactManager
-nmake clean
+rem nmake clean
 %QMAKE% %AA%\ContactManager\ContactManager.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin
@@ -43,7 +43,7 @@ rem CopyFiles
 rem
 
 cd %AA%\build\CopyFiles
-nmake clean
+rem nmake clean
 %QMAKE% %AA%\CopyFiles\CopyFiles.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin
@@ -55,7 +55,7 @@ rem EasyNotepad
 rem
 
 cd %AA%\build\EasyNotepad
-nmake clean
+rem nmake clean
 %QMAKE% %AA%\EasyNotepad\EasyNotepad.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin
@@ -68,7 +68,7 @@ rem EncPad
 rem
 
 cd %AA%\build\EncPad
-nmake clean
+rem nmake clean
 %QMAKE% %AA%\EncPad\EncPad.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin
@@ -80,7 +80,7 @@ rem EncryptFolder
 rem
 
 cd %AA%\build\EncryptFolder
-nmake clean
+rem nmake clean
 %QMAKE% %AA%\EncryptFolder\EncryptFolder.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin
@@ -93,7 +93,7 @@ rem
 
 cd %AA%\build\GoogleFetch
 nmake clean
-%QMAKE% %AA%\GoogleFetch\GoogleFetch.pro -spec %WINSPEC%
+rem %QMAKE% %AA%\GoogleFetch\GoogleFetch.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
@@ -104,7 +104,7 @@ rem KeyBackup
 rem
 
 cd %AA%\build\KeyBackup
-nmake clean
+rem nmake clean
 %QMAKE% %AA%\KeyBackup\KeyBackup.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin
@@ -116,7 +116,7 @@ rem ParseWeb
 rem
 
 cd %AA%\build\ParseWeb
-nmake clean
+rem nmake clean
 %QMAKE% %AA%\ParseWeb\ParseWeb.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin

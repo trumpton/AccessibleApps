@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Installer>
+  <Name>Trumpton Apps</Name>
+  <Version>2.1.0</Version>
+  <Title>Trumpton Apps Installer</Title>
+  <Publisher>Vizier Design</Publisher>
+  <StartMenuDir>Trumpton Apps</StartMenuDir>
+  <TargetDir>@ApplicationsDirX64@/TrumptonApps</TargetDir>
+  <RemoteRepositories>
+    <Repository>
+      <Url>http://www.vizier.uk/repository/accessibleapps-win64-6.7.3</Url>
+    </Repository>
+  </RemoteRepositories>
+</Installer>
+
+
