@@ -10,8 +10,8 @@ downloadapps-https.sh / downloadapps-ssh.sh
 This script downloads the applications from the 
 git repository.
 
-The tools should then be built as MSVC2015_64
-applications using QT 5.10.1.
+The tools should then be built as MSVC2019_64
+applications using QT 6.7.3
 
 
 pullupdates.sh
@@ -23,7 +23,7 @@ made to each application from the git repository.
 Building Linux
 --------------
 
-To build, from a command line prompt, run dobuildlin.sh.  This will build
+To build, from a command line prompt, run dobuildlin.sh all.  This will build
 the files into the build folder, then copy the executables into the bin
 folder.  Libraries are not copied, and are expected to be available in the
 standard lib folders.
@@ -35,14 +35,17 @@ If a new pull has been done, ensure that you remove the subdirectories
 under 'build' - this is because the version acquisition lines in the pro
 files affect compiler switches, but do not 'dirty' the resulting makefiles.
 
-To build, open a Visual C command line prompt, and run dobuildwin.bat
-This will build the files into the build folder, then copy the executables
-into the bin folder, and copy across all of the relevant DLLs.
+To build, open a Visual C command line prompt, and run winshell.bat (this
+will set all the required environment variables up). 
+
+Then, to build, run dobuildwin.bat -  this will build the files into the 
+build folder, then copy the executables into the bin folder, and copy 
+across all of the relevant DLLs.
 
 Deploying Windows
 -----------------
 
-Edit the deploy/config/config-win64-5.10.1.xml, and ensure that the
+Edit the deploy/config/config-win64-6.7.3.xml, and ensure that the
 version number, and web repository location are correct.
 
 The deployment assumes that Git has been installed.
@@ -65,8 +68,8 @@ must be manually changed.
 Output Files will end up in 'repository'.  
 The online files must be uploaded to vizier.
 
-QT6.2
-=====
+QT6 under Linux
+===============
 
 Under Linux, if QT has been installed from the QT repository, several 
 dependencies may also need to be installed:

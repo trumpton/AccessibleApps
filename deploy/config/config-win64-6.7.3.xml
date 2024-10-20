@@ -8,7 +8,7 @@
   <TargetDir>@ApplicationsDirX64@/TrumptonApps</TargetDir>
   <RemoteRepositories>
     <Repository>
-      <Url>http://www.vizier.uk/repository/accessibleapps-win64-6.7.3</Url>
+      <Url>http://www.vizier.uk/repository/accessibleapps-win64</Url>
     </Repository>
   </RemoteRepositories>
 </Installer>

@@ -8,7 +8,7 @@
   <TargetDir>@ApplicationsDirX86@/TrumptonApps</TargetDir>
   <RemoteRepositories>
     <Repository>
-      <Url>http://www.vizier.uk/repository/accessibleapps-linux-5.9.5</Url>
+      <Url>http://www.vizier.uk/repository/accessibleapps-linux</Url>
     </Repository>
   </RemoteRepositories>
 </Installer>
