@@ -14,7 +14,7 @@ set WINSPEC=win32-msvc
 set OPENSSL=%AA%\deploy\src\openssl64\bin\*.dll
 
 cd %AA%
-deltree %AA%\bin
+
 mkdir %AA%\build
 mkdir %AA%\build\ContactManager
 mkdir %AA%\build\CopyFiles
@@ -31,8 +31,8 @@ rem Contact Manager
 rem
 
 cd %AA%\build\ContactManager
-rem nmake clean
 %QMAKE% %AA%\ContactManager\ContactManager.pro -spec %WINSPEC%
+nmake clean
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
@@ -43,8 +43,8 @@ rem CopyFiles
 rem
 
 cd %AA%\build\CopyFiles
-rem nmake clean
 %QMAKE% %AA%\CopyFiles\CopyFiles.pro -spec %WINSPEC%
+nmake clean
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
@@ -55,8 +55,8 @@ rem EasyNotepad
 rem
 
 cd %AA%\build\EasyNotepad
-rem nmake clean
 %QMAKE% %AA%\EasyNotepad\EasyNotepad.pro -spec %WINSPEC%
+nmake clean
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
@@ -68,8 +68,8 @@ rem EncPad
 rem
 
 cd %AA%\build\EncPad
-rem nmake clean
 %QMAKE% %AA%\EncPad\EncPad.pro -spec %WINSPEC%
+nmake clean
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
@@ -80,8 +80,8 @@ rem EncryptFolder
 rem
 
 cd %AA%\build\EncryptFolder
-rem nmake clean
 %QMAKE% %AA%\EncryptFolder\EncryptFolder.pro -spec %WINSPEC%
+nmake clean
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
@@ -92,8 +92,8 @@ rem GoogleFetch
 rem
 
 cd %AA%\build\GoogleFetch
+%QMAKE% %AA%\GoogleFetch\GoogleFetch.pro -spec %WINSPEC%
 nmake clean
-rem %QMAKE% %AA%\GoogleFetch\GoogleFetch.pro -spec %WINSPEC%
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
@@ -104,8 +104,8 @@ rem KeyBackup
 rem
 
 cd %AA%\build\KeyBackup
-rem nmake clean
 %QMAKE% %AA%\KeyBackup\KeyBackup.pro -spec %WINSPEC%
+nmake clean
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
@@ -116,8 +116,8 @@ rem ParseWeb
 rem
 
 cd %AA%\build\ParseWeb
-rem nmake clean
 %QMAKE% %AA%\ParseWeb\ParseWeb.pro -spec %WINSPEC%
+nmake clean
 nmake
 copy release\*.exe %AA%\bin
 cd %AA%\bin
