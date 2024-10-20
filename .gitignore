@@ -20,3 +20,4 @@ EasyList
 build
 bin
 repository
+buildvars.inc
