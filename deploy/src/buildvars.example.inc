@@ -9,7 +9,8 @@ APPNAME=AccessibleApps
 #
 
 REPONAME=accessibleapps
-QTVERSION=5.10.1
+QTVERSION=6.7.3
+
 
 #
 # Paths to EXE File
@@ -28,11 +29,11 @@ GOOGLEFETCH=build/GoogleFetch/release
 # Setup VC
 #
 
-VCINSTALLDIR="/c/Program Files (x86)/Microsoft Visual Studio 14.0/VC"
+VCINSTALLDIR="/c/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC"
 
 #
 # Path to QT Files
 #
 
-QTHOME=/e/Qt5.10.1/5.10.1/msvc2015_64
-QTINST=/e/QtIFW-3.1.0
+QTHOME=/c/dev/Qt/6.7.3/msvc2019_64
+QTINST=/c/dev/Qt/Tools/QtInstallerFramework/4.8
