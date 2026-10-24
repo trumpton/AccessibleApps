@@ -3,13 +3,16 @@
 # install-tools.sh
 #
 # Installs the compilers, Qt 6 and libraries needed to build the
-# AccessibleApps on Debian / Ubuntu, then (if needed) walks you through
-# creating account-googleaccess.h for the apps that talk to Google
-# (ContactManager and GoogleFetch).
+# AccessibleApps on Debian / Ubuntu, then sets up account-googleaccess.h
+# for the apps that talk to Google (ContactManager and GoogleFetch).
+#
+# An existing account-googleaccess.h with a real Client ID and secret is
+# reused as it is.  Use --newgoogleaccess to replace it.
 #
 # Usage:
 #   ./install-tools.sh                    install tools, then Google setup if needed
-#   ./install-tools.sh --google-account   only run the Google account setup
+#   ./install-tools.sh --google-account   only check / set up the Google account files
+#   ./install-tools.sh --newgoogleaccess  replace the Google credentials
 #
 
 SCRIPTDIR="$(cd "$(dirname "$0")" && pwd)"
@@ -63,7 +66,26 @@ setup_qmake()
 
 
 #
-# Write account-googleaccess.h into one app folder
+# Read CLIENTID and SECRET from an existing header.
+# Sets FOUND_ID and FOUND_SECRET, and returns 0 only if both are real values
+# (not empty, not the placeholders from account-googleaccess.h.example).
+#
+read_existing_credentials()
+{
+    local header="$1"
+    local pattern='^[A-Za-z0-9._-]+$'
+
+    FOUND_ID=$(sed -n 's/^#define CLIENTID "\(.*\)"$/\1/p' "$header" | head -n 1)
+    FOUND_SECRET=$(sed -n 's/^#define SECRET "\(.*\)"$/\1/p' "$header" | head -n 1)
+
+    [[ "$FOUND_ID" =~ $pattern ]] && [ "$FOUND_ID" != "enter-your-client-id" ] || return 1
+    [[ "$FOUND_SECRET" =~ $pattern ]] && [ "$FOUND_SECRET" != "enter-your-client-secret" ] || return 1
+    return 0
+}
+
+
+#
+# Write account-googleaccess.h into one app folder, using CLIENTID and SECRET
 #
 write_google_header()
 {
@@ -102,46 +124,12 @@ EOF
 
 
 #
-# Walk through creating account-googleaccess.h for each Google app
+# Ask the user for a Client ID and secret, after explaining where to get them
 #
-setup_google_account()
+prompt_credentials()
 {
-    local app
-    local targets=()
-
-    # Find the app folders that have been downloaded
-    for app in $GOOGLEAPPS; do
-        if [ -d "$SCRIPTDIR/$app" ]; then
-            targets+=("$app")
-        fi
-    done
-
-    if [ ${#targets[@]} -eq 0 ]; then
-        echo ""
-        echo "No Google-enabled app is downloaded yet, so account-googleaccess.h"
-        echo "cannot be created. Run downloadapps-https.sh first, then:"
-        echo "    ./install-tools.sh --google-account"
-        return 1
-    fi
-
-    # Only create the headers that are missing, unless the user asks to replace them
-    local missing=()
-    for app in "${targets[@]}"; do
-        if [ -f "$SCRIPTDIR/$app/account-googleaccess.h" ]; then
-            echo "Found $app/account-googleaccess.h"
-        else
-            missing+=("$app")
-        fi
-    done
-
-    if [ ${#missing[@]} -eq 0 ]; then
-        if [ ! -t 0 ]; then return 0; fi
-        read -r -p "Replace the existing credentials? [y/N] " answer
-        case "$answer" in
-            y|Y|yes|YES) missing=("${targets[@]}") ;;
-            *) return 0 ;;
-        esac
-    fi
+    local pattern='^[A-Za-z0-9._-]+$'
+    local attempt
 
     cat <<'EOF'
 
@@ -163,9 +151,6 @@ the Google Cloud console.  One set of credentials is used for all of them.
 
 EOF
 
-    echo "Headers to create: ${missing[*]}"
-    echo ""
-
     if [ -t 0 ]; then
         read -r -p "Press Enter when you have them..." _
     fi
@@ -175,7 +160,7 @@ EOF
 
     for attempt in 1 2 3; do
         read -r -p "Client ID: " CLIENTID
-        if [[ "$CLIENTID" =~ ^[A-Za-z0-9._-]+$ ]]; then break; fi
+        if [[ "$CLIENTID" =~ $pattern ]]; then break; fi
         echo "  Client ID should contain only letters, digits, '.', '_' or '-'."
         CLIENTID=""
     done
@@ -183,7 +168,7 @@ EOF
     for attempt in 1 2 3; do
         read -r -s -p "Client secret (input hidden): " SECRET
         echo ""
-        if [[ "$SECRET" =~ ^[A-Za-z0-9._-]+$ ]]; then break; fi
+        if [[ "$SECRET" =~ $pattern ]]; then break; fi
         echo "  Client secret should contain only letters, digits, '.', '_' or '-'."
         SECRET=""
     done
@@ -192,6 +177,77 @@ EOF
         echo "ERROR: Client ID and secret are required. Nothing written."
         return 1
     fi
+}
+
+
+#
+# Set up account-googleaccess.h for each downloaded Google-enabled app
+#   mode "ensure"  - keep real credentials already present; fill in any gaps
+#   mode "replace" - ask for new credentials and overwrite every header
+#
+setup_google_account()
+{
+    local mode="$1"
+    local app
+    local targets=()
+    local missing=()
+    local have_creds=0
+
+    # Find the app folders that have been downloaded
+    for app in $GOOGLEAPPS; do
+        if [ -d "$SCRIPTDIR/$app" ]; then
+            targets+=("$app")
+        fi
+    done
+
+    if [ ${#targets[@]} -eq 0 ]; then
+        echo ""
+        echo "No Google-enabled app is downloaded yet, so account-googleaccess.h"
+        echo "cannot be created. Run downloadapps-https.sh first, then:"
+        echo "    ./install-tools.sh --google-account"
+        return 1
+    fi
+
+    if [ "$mode" = "replace" ]; then
+        missing=("${targets[@]}")
+        echo "Replacing the Google credentials in: ${missing[*]}"
+    else
+        for app in "${targets[@]}"; do
+            local header="$SCRIPTDIR/$app/account-googleaccess.h"
+            if [ -f "$header" ] && read_existing_credentials "$header"; then
+                echo "Using existing credentials in $app/account-googleaccess.h"
+                if [ $have_creds -eq 0 ]; then
+                    CLIENTID="$FOUND_ID"
+                    SECRET="$FOUND_SECRET"
+                    have_creds=1
+                fi
+            else
+                if [ -f "$header" ]; then
+                    echo "$app/account-googleaccess.h has no real Client ID or secret, so it will be set up."
+                fi
+                missing+=("$app")
+            fi
+        done
+
+        if [ ${#missing[@]} -eq 0 ]; then
+            echo ""
+            echo "Keeping the existing credentials."
+            echo "To replace them, run: ./install-tools.sh --newgoogleaccess"
+            return 0
+        fi
+
+        if [ $have_creds -eq 1 ]; then
+            echo "Copying the same credentials to: ${missing[*]}"
+            echo ""
+            for app in "${missing[@]}"; do
+                write_google_header "$app" || return 1
+            done
+            return 0
+        fi
+    fi
+
+    echo "Headers to create: ${missing[*]}"
+    prompt_credentials || return 1
 
     for app in "${missing[@]}"; do
         write_google_header "$app" || return 1
@@ -203,22 +259,26 @@ EOF
 
 case "$1" in
     --google-account)
-        setup_google_account
+        setup_google_account ensure
+        exit $?
+        ;;
+    --newgoogleaccess)
+        setup_google_account replace
         exit $?
         ;;
     -h|--help)
-        sed -n '2,11p' "$0"
+        sed -n '2,13p' "$0"
         exit 0
         ;;
     "")
         install_packages
         setup_qmake
         echo ""
-        setup_google_account
+        setup_google_account ensure
         ;;
     *)
         echo "Unknown option: $1"
-        echo "Usage: ./install-tools.sh [--google-account]"
+        echo "Usage: ./install-tools.sh [--google-account | --newgoogleaccess]"
         exit 1
         ;;
 esac
