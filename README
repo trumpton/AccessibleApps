@@ -39,10 +39,17 @@ Run these steps in order, from the AccessibleApps folder.
    Builds all the apps into the build folder, then copies the executables
    into the bin folder.
 
-5. Run the programs from the bin folder, e.g. ./bin/ContactManager
+5. ./install-linux.sh
 
-To update the apps later, run ./pullupdates.sh, then ./dobuildlin.sh all
-again.  You do not need to repeat steps 1 or 3 unless the Google
+   Copies the programs into ~/AccessibleApps/bin, along with their .ini
+   files (created from the examples if missing).  Databases, journals and
+   message templates are kept under ~/AccessibleApps/data.  Existing .ini
+   files are never overwritten.
+
+6. Run the programs from ~/AccessibleApps/bin, e.g. ~/AccessibleApps/bin/ContactManager
+
+To update the apps later, run ./pullupdates.sh, then ./dobuildlin.sh all,
+then ./install-linux.sh, which copies only the programs that have changed.  You do not need to repeat steps 1 or 3 unless the Google
 credentials change or a new package is required.
 
 downloadapps-https.sh / downloadapps-ssh.sh
