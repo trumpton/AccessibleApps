@@ -4,6 +4,41 @@ INTRODUCTION
 
 This bundle is the Trumpton Apps Accessible tools.
 
+STARTING FROM SCRATCH (Linux)
+=============================
+
+Run these steps in order, from the AccessibleApps folder.
+
+1. ./install-tools.sh
+
+   Installs the compiler, Qt 6, GStreamer and other libraries needed to
+   build every app (Debian / Ubuntu only), and selects Qt 6 as the default
+   'qmake'.  It does not download the apps yet.
+
+2. ./downloadapps-https.sh      (or ./downloadapps-ssh.sh if you use SSH keys)
+
+   Clones EasyNotepad, ContactManager, ParseWeb, EncryptFolder, Lib,
+   EncPad, GoogleFetch, KeyBackup and EasyList into this folder.
+
+3. ./install-tools.sh --google-account
+
+   Needed before ContactManager can be built.  Creates
+   ContactManager/account-googleaccess.h, asking you for the Client ID and
+   Client secret from your own Google Cloud project.  The script explains
+   how to create them.  The file is kept private and is git-ignored.
+   If you ran step 1 after step 2, this step is already done for you.
+
+4. ./dobuildlin.sh all
+
+   Builds all the apps into the build folder, then copies the executables
+   into the bin folder.
+
+5. Run the programs from the bin folder, e.g. ./bin/ContactManager
+
+To update the apps later, run ./pullupdates.sh, then ./dobuildlin.sh all
+again.  You do not need to repeat steps 1 or 3 unless the Google
+credentials change or a new package is required.
+
 downloadapps-https.sh / downloadapps-ssh.sh
 -------------------------------------------
 
@@ -71,8 +106,15 @@ The online files must be uploaded to vizier.
 QT6 under Linux
 ===============
 
-Under Linux, if QT has been installed from the QT repository, several 
-dependencies may also need to be installed:
+On Debian / Ubuntu, install-tools.sh (step 1 above) installs the Qt 6
+packages and their dependencies.  Its package list is:
 
-sudo apt-get install gstreamer1.0 libspa-lib-0.1 clang libspa-bluetooth
+  build-essential git libssl-dev
+  qt6-base-dev qt6-base-dev-tools qt6-5compat-dev qt6-multimedia-dev
+  gstreamer1.0-plugins-base gstreamer1.0-plugins-good
+  gstreamer1.0-libav gstreamer1.0-pulseaudio
+  libspa-0.2-bluetooth clang
+
+If you use Qt installed from the Qt online installer instead of apt, put
+its qmake first on your PATH and install the same dependencies yourself.
 
