@@ -22,10 +22,11 @@ Run these steps in order, from the AccessibleApps folder.
 
 3. ./install-tools.sh --google-account
 
-   Needed before ContactManager can be built.  Creates
-   ContactManager/account-googleaccess.h, asking you for the Client ID and
-   Client secret from your own Google Cloud project.  The script explains
-   how to create them.  The file is kept private and is git-ignored.
+   Needed before ContactManager and GoogleFetch can be built.  Creates
+   account-googleaccess.h in the ContactManager and GoogleFetch folders,
+   asking you for the Client ID and Client secret from your own Google
+   Cloud project (one set is used for both).  The script explains how to
+   create them.  The files are kept private and are git-ignored.
    If you ran step 1 after step 2, this step is already done for you.
 
 4. ./dobuildlin.sh all
